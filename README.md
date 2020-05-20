@@ -1,4 +1,4 @@
-# WiFiDuck
+# MeshDuck
 
 This is a modification of [the original WiFiDuck by Spacehuhn](https://github.com/SpacehuhnTech/WiFiDuck). All credit goes to him.
 This gives mesh capability to the project, allowing the scripts to be run on multiple computers at once.
