@@ -5,7 +5,7 @@ This gives mesh capability to the project, allowing the scripts to be run on mul
 
 ~~It was all hacked together in a very short time period and is my first project dealing with mesh in this form. Expect bugs.~~
 
-<br>
+<br><hr>
 
 <p align="center">
 <img alt="WiFi Duck Logo" src="https://raw.githubusercontent.com/spacehuhn/WiFiDuck/master/img/logo.png" width="200">
