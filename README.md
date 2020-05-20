@@ -1,5 +1,9 @@
 # WiFiDuck
 
+This is a modification to the original WiFiDuck by SpaceHuhn. All credit goes to him.
+
+<br>
+
 <p align="center">
 <img alt="WiFi Duck Logo" src="https://raw.githubusercontent.com/spacehuhn/WiFiDuck/master/img/logo.png" width="200">
 </p>
