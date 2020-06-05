@@ -7,7 +7,7 @@ This gives mesh capability to the project, allowing the scripts to be run on mul
 
 Known Issues:
 <ul>
-  <li> Larger files will not send over the mesh.
+  <li> Larger files will not send over the mesh. Working scripts so far have been less than 500 bytes.
 </ul>
 <br><hr>
 
