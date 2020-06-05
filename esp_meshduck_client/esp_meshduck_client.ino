@@ -36,7 +36,7 @@ String tempRead;
 
 void setup() {
   EEPROM.begin(4096);
-  // write a 0 to all 512 bytes of the EEPROM
+  // write a 0 to all 4096 bytes of the ESP8266 EEPROM
   for (int i = 0; i < 4096; i++) {
     EEPROM.write(i, 0);
   }
