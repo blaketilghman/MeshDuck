@@ -9,7 +9,7 @@ Has been tested successfully on two ESP8266 and two Pro Micro boards.
 
 Known Issues:
 <ul>
-  <li> Larger files will not send over the mesh. Working scripts so far have been less than 2000 bytes. 1999 bytes works very unreliably, but 2000 will not send over mesh. This could be a limitation of the PainlessMesh library. It is recommended to split larger payloads into a few smaller payloads <= 1500 bytes for best performance. 
+  <li> Larger files will not send over the mesh. Working scripts so far have been less than 2000 bytes. 1999 bytes works very unreliably, but 2000 will not send over mesh. It is recommended to split larger payloads into a few smaller payloads <= 1500 bytes for best performance. 
   <li> Sometimes there is an Internal Connection Error when powering the ESP with the Pro Micro pins. It has been more consistent in my tests to use two USB cables (one for each board) and only connect the data pins, (2/3 on Pro Micro and D2/D1 on ESP respectively). This could be an issue only with my boards/jumpers but I will update when I am able to test more.
 </ul>
 <br><hr>
