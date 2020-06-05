@@ -12,7 +12,7 @@
 
 #include <EEPROM.h>
 
-#define   MESH_PREFIX     "meshNetwork"
+#define   MESH_PREFIX     "Test"
 #define   MESH_PASSWORD   "somethingSneaky"
 #define   MESH_PORT       5555
 
@@ -35,9 +35,9 @@ String tempFileName = "/TEMPFILE.txt";
 String tempRead;
 
 void setup() {
-  EEPROM.begin(512);
+  EEPROM.begin(4096);
   // write a 0 to all 512 bytes of the EEPROM
-  for (int i = 0; i < 512; i++) {
+  for (int i = 0; i < 4096; i++) {
     EEPROM.write(i, 0);
   }
   EEPROM.end();
@@ -111,6 +111,8 @@ void loop() {
 
 void receivedCallback( uint32_t from, String &msg ) {
 //  Serial.println(msg.c_str());
+
+  Serial.println("Recieved callback.");
   
   File file = SPIFFS.open(tempFileName, "w");
   file.println(msg.c_str());
