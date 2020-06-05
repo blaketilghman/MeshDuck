@@ -5,6 +5,10 @@ This gives mesh capability to the project, allowing the scripts to be run on mul
 
 ~~It was all hacked together in a very short time period and is my first project dealing with mesh in this form. Expect bugs.~~
 
+Known Issues:
+<ul>
+  <li> Larger files will not send over the mesh.
+</ul>
 <br><hr>
 
 <p align="center">
