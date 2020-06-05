@@ -9,7 +9,7 @@ Has been tested successfully on two ESP8266 and two Pro Micro boards.
 
 Known Issues:
 <ul>
-  <li> Larger files will not send over the mesh. Working scripts so far have been less than 2000 bytes.
+  <li> Larger files will not send over the mesh. Working scripts so far have been less than 2000 bytes. 1999 bytes is fine, but 2000 will not send over mesh. This could be a limitation of the PainlessMesh library.
 </ul>
 <br><hr>
 
