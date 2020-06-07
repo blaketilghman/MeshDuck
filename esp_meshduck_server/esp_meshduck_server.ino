@@ -257,7 +257,7 @@ void loop() {
   }
   /////////////////////////////////////////////
   
-}02
+}
 
 void receivedCallback( const uint32_t &from, const String &msg ) {
   Serial.printf("bridge: Received from %u msg=%s\n", from, msg.c_str());
