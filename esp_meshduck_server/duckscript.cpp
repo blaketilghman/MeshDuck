@@ -61,6 +61,8 @@ namespace duckscript {
         
         com::send(buf, buf_i);
 
+        delay(100);
+
         if (strncmp((char*)buf, "REPEAT", _min(buf_i, 6)) != 0) {
             if (prevMessage) free(prevMessage);
             prevMessageLen = buf_i;
