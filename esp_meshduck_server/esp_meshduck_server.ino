@@ -162,56 +162,19 @@ void loop() {
   debug_update();
   
   WiFiClient client = serialServer.available();
-  
-  if (duckscript::isRunning()) {
-          //Serial.println(timesRun);
-/////////////////////////////////////////////
-    if (mesh.getNodeList().size() > 0) {
+
+  if (mesh.getNodeList().size() > 0) {
+    if (duckscript::isRunning()) {
       shouldRun = 1; 
       scriptName = duckscript::currentScript();
       if (timesRun == 0) {
-        //Serial.println(timesRun);
-//        scriptName = duckscript::currentScript();
-  //      duckscript::run(scriptName);
-////////////////////////////////////////////////////////
-//        File file = SPIFFS.open(scriptName, "r");
-//        if (!file) {
-//          Serial.println("Error opening file");
-//          return;
-//        }
-//        String msg;
-//        while (file.available()) {
-//          msg += String(char(file.read()));
-//  //        delay(350);
-//  //        mesh.sendBroadcast(msg);
-//        }
-//  //      mesh.sendBroadcast(String(char(file.read())));
-//        Serial.println(msg);
-//        delay(300);
-//        
-//        Serial.println("Sending to mesh...");
-//        delay(300);
-//        mesh.sendBroadcast(msg);
-//        
-//        delay(300);
-//  //      mesh.sendBroadcast(scriptName);
-//        file.close();
-//        delay(300);
-//  //      timesRun++;
-//        timesRun = 1;
-//        Serial.println("Finished, and message should be broadcast.");
-////////////////////////////////////////////////////////////////////////
+        
       }
-//      else {
-////      duckscript::stopAll();
-//      Serial.println("Still running.");
-//      }
     }
     
 /////////////////////////////////////////////
   }
   if (!duckscript::isRunning() && timesRun == 1) {
-//    timesRun--;
     Serial.println("Not running anymore, so setting to 0");
     delay(300);
     timesRun = 0;
@@ -227,10 +190,7 @@ void loop() {
     String msg;
     while (file.available()) {
       msg += String(char(file.read()));
-//        delay(350);
-//        mesh.sendBroadcast(msg);
     }
-//      mesh.sendBroadcast(String(char(file.read())));
     Serial.println(msg);
     delay(300);
     
@@ -239,10 +199,8 @@ void loop() {
     mesh.sendBroadcast(msg);
     
     delay(300);
-//      mesh.sendBroadcast(scriptName);
     file.close();
     delay(300);
-//      timesRun++;
     timesRun = 1;
     Serial.println("Finished, and message should be broadcast.");
 
