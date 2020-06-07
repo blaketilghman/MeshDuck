@@ -7,6 +7,8 @@ Has been tested successfully on two ESP8266 and two Pro Micro boards.
 
 ~~It was all hacked together in a very short time period and is my first project dealing with mesh in this form. Expect bugs.~~
 
+In my project, I also changed the default IP of painlessMesh to be 192.168.4.1 to closer reflect the original project. This can be done by locating where your library is installed and going to src/arduino/wifi.hpp and edit the apIp value in apInit() towards the bottom of the file.
+
 Known Issues:
 <ul>
   <li> Larger files will not send over the mesh. It is recommended to split larger payloads into a few smaller payloads (<= 1500 bytes each) for best performance. 
