@@ -43,9 +43,6 @@ painlessMesh mesh;
 #define   MESH_PASSWORD   "somethingSneaky"
 #define   MESH_PORT       5555
 
-//#define   STATION_SSID     "WiFi Test"
-//#define   STATION_PASSWORD "wifiduck"
-
 #define HOSTNAME "HTTP_BRIDGE"
 
 void receivedCallback( const uint32_t &from, const String &msg );
@@ -57,7 +54,6 @@ IPAddress getlocalIP();
 
 WiFiServer serialServer(1337);
 IPAddress ServerIP(192, 168, 4, 1);
-IPAddress ClientIP(192, 168, 4, 2);
 IPAddress myIP(0,0,0,0);
 IPAddress myAPIP(0,0,0,0);
 
@@ -68,12 +64,12 @@ bool scriptDone = false;
 int timesRun = 0;
 
 void setup() {
-  EEPROM.begin(4096);
-  // write a 0 to all 4096 bytes of the ESP8266 EEPROM
-  for (int i = 0; i < 4096; i++) {
-    EEPROM.write(i, 0);
-  }
-  EEPROM.end();
+//  EEPROM.begin(4096);
+//  // write a 0 to all 4096 bytes of the EEPROM
+//  for (int i = 0; i < 4096; i++) {
+//    EEPROM.write(i, 0);
+//  }
+//  EEPROM.end();
   
   Serial.begin(115200);
 
@@ -157,7 +153,6 @@ void loop() {
   WiFiClient client = serialServer.available();
   
   if (duckscript::isRunning()) {
-//    com::update();
           //Serial.println(timesRun);
 /////////////////////////////////////////////
     if (timesRun == 0) {
@@ -177,21 +172,24 @@ void loop() {
       }
 //      mesh.sendBroadcast(String(char(file.read())));
       Serial.println(msg);
-      delay(100);
+      delay(300);
       if (mesh.getNodeList().size() > 0) {
         Serial.println("Sending to mesh...");
+        delay(300);
         mesh.sendBroadcast(msg);
       }
-      delay(100);
+      delay(300);
 //      mesh.sendBroadcast(scriptName);
       file.close();
-//      delay(500);
-      timesRun++;
+      delay(300);
+//      timesRun++;
+      timesRun = 1;
     }
 /////////////////////////////////////////////
   }
   if (!duckscript::isRunning() && timesRun == 1) {
-    timesRun--;
+//    timesRun--;
+    timesRun = 0;
   }
   
   /////////////////////////////////////////////
