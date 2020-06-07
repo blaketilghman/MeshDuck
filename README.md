@@ -12,6 +12,8 @@ In my project, I also changed the default IP of painlessMesh to be 192.168.4.1 t
 Known Issues:
 <ul>
   <li> Larger files will not send over the mesh. It is recommended to split larger payloads into a few smaller payloads (<= 1900 bytes each) for best performance. 
+  <li> If there is a random Internal Connection Error but everything seems to be connected properly, try resetting the server and clients before trying again.
+                                                                                                                               
 </ul>
 <br><hr>
 
