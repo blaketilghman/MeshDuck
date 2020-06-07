@@ -19,8 +19,8 @@
 //#define   STATION_SSID     "WiFi Test"
 //#define   STATION_PASSWORD "wifiduck"
 //#define   STATION_PORT     5555
-//uint8_t   station_ip[4] =  {192,168,4,1}; // IP of the server
-uint8_t   station_ip[4] =  {10,227,170,1}; // IP of the server
+uint8_t   station_ip[4] =  {192,168,4,1}; // IP of the server
+//uint8_t   station_ip[4] =  {10,227,170,1}; // IP of the server
 
 // prototypes
 void receivedCallback( uint32_t from, String &msg );
@@ -36,7 +36,7 @@ String tempRead;
 
 void setup() {
   EEPROM.begin(4096);
-  // write a 0 to all 4096 bytes of the ESP8266 EEPROM
+  // write a 0 to all 4096 bytes of the EEPROM
   for (int i = 0; i < 4096; i++) {
     EEPROM.write(i, 0);
   }
@@ -81,6 +81,7 @@ void setup() {
 void loop() {
   mesh.update();
   if (myIP.toString() == "(IP unset)"){
+//  if (!myIP.toString().startsWith("10")){
     getlocalIP();
   } else {
     digitalWrite(BUILTIN_LED, LOW);
