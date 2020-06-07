@@ -9,7 +9,7 @@ Has been tested successfully on two ESP8266 and two Pro Micro boards.
 
 Known Issues:
 <ul>
-  <li> Larger files will not send over the mesh. Working scripts so far have been less than 2000 bytes. 1999 bytes works very unreliably, but 2000 will not send over mesh. It is recommended to split larger payloads into a few smaller payloads <= 1500 bytes for best performance. 
+  <li> Larger files will not send over the mesh. It is recommended to split larger payloads into a few smaller payloads (<= 1500 bytes each) for best performance. 
 </ul>
 <br><hr>
 
