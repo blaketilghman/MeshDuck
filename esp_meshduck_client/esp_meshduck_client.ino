@@ -35,12 +35,12 @@ String tempFileName = "/TEMPFILE.txt";
 String tempRead;
 
 void setup() {
-  EEPROM.begin(4096);
-  // write a 0 to all 4096 bytes of the EEPROM
-  for (int i = 0; i < 4096; i++) {
-    EEPROM.write(i, 0);
-  }
-  EEPROM.end();
+//  EEPROM.begin(4096);
+//  // write a 0 to all 512 bytes of the EEPROM
+//  for (int i = 0; i < 4096; i++) {
+//    EEPROM.write(i, 0);
+//  }
+//  EEPROM.end();
   
   Serial.begin(115200);
   mesh.setDebugMsgTypes( ERROR | STARTUP | CONNECTION );  // set before init() so that you can see startup messages
