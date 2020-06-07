@@ -29,8 +29,6 @@ unsigned int localPort = 2000;
 
 painlessMesh mesh;
 
-///////////////////////////////////////////////////////
-
 //#ifdef ESP8266
 #include "Hash.h"
 #include <ESPAsyncTCP.h>
@@ -52,8 +50,6 @@ void receivedCallback( const uint32_t &from, const String &msg );
 IPAddress getlocalIP();
 
 //AsyncWebServer server(80);
-
-///////////////////////////////////////////////////////
 
 WiFiServer serialServer(1337);
 IPAddress ServerIP(192, 168, 4, 1);
@@ -96,7 +92,6 @@ void setup() {
   settings::begin();
   cli::begin();
 
-  ////////////////////////////////////////////////////////
 //  mesh.setDebugMsgTypes( ERROR | STARTUP | CONNECTION );  // set before init() so that you can see startup messages
   mesh.setDebugMsgTypes( ERROR | STARTUP );  // set before init() so that you can see startup messages
 
@@ -112,14 +107,11 @@ void setup() {
   mesh.setRoot(true);
   // This node and all other nodes should ideally know the mesh contains a root, so call this on all nodes
   mesh.setContainsRoot(true);
-//  meshh::begin();
 
   myAPIP = IPAddress(mesh.getAPIP());
   Serial.println("My AP IP is " + myAPIP.toString());
 
   webserver::begin();
-  ////////////////////////////////////////////////////////
-  
 
   com::onDone(duckscript::nextLine);
   com::onError(duckscript::stopAll);
@@ -139,22 +131,18 @@ void setup() {
   debugln(" `---'   hjw\n");
 
   duckscript::run(settings::getAutorun());
-
-  //udp.begin(localPort);
-  //    Serial.print("Local port: ");
-  //    Serial.println(udp.localPort());
   /*
     Serial.print("Status: "); Serial.println(WiFi.status());    // Network parameters
     Serial.print("IP: ");     Serial.println(WiFi.localIP());
     Serial.print("Subnet: "); Serial.println(WiFi.subnetMask());
     Serial.print("Gateway: "); Serial.println(WiFi.gatewayIP());
     Serial.print("SSID: "); Serial.println(WiFi.SSID());
-    Serial.print("Signal: "); Serial.println(WiFi.RSSI());*/
+    Serial.print("Signal: "); Serial.println(WiFi.RSSI());
+  */
   pinMode(ledPin, OUTPUT);
 }
 
 void loop() {
-//  Serial.println(timesRun);
   
   com::update();
   webserver::update();
@@ -165,14 +153,11 @@ void loop() {
 
   if (mesh.getNodeList().size() > 0) {
     if (duckscript::isRunning()) {
-      shouldRun = 1; 
       scriptName = duckscript::currentScript();
       if (timesRun == 0) {
-        
+        shouldRun = 1;
       }
     }
-    
-/////////////////////////////////////////////
   }
   if (!duckscript::isRunning() && timesRun == 1) {
     Serial.println("Not running anymore, so setting to 0");
@@ -181,7 +166,7 @@ void loop() {
     delay(300);
     Serial.println("timesRun successfully set to 0.");
   }
-  if (!duckscript::isRunning() && shouldRun == 1) {
+  if (shouldRun == 1) {
     File file = SPIFFS.open(scriptName, "r");
     if (!file) {
       Serial.println("Error opening file");
@@ -202,18 +187,16 @@ void loop() {
     file.close();
     delay(300);
     timesRun = 1;
-    Serial.println("Finished, and message should be broadcast.");
+    Serial.println("Finished. Message should've just been broadcast.");
 
     shouldRun = 0;
   }
   
-  /////////////////////////////////////////////
   mesh.update();
   if(myIP != getlocalIP()){
     myIP = getlocalIP();
     Serial.println("My IP is " + myIP.toString());
   }
-  /////////////////////////////////////////////
   
 }
 
