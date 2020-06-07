@@ -43,6 +43,9 @@ painlessMesh mesh;
 #define   MESH_PASSWORD   "somethingSneaky"
 #define   MESH_PORT       5555
 
+//#define   STATION_SSID     "WiFi Test"
+//#define   STATION_PASSWORD "wifiduck"
+
 #define HOSTNAME "HTTP_BRIDGE"
 
 void receivedCallback( const uint32_t &from, const String &msg );
@@ -54,6 +57,7 @@ IPAddress getlocalIP();
 
 WiFiServer serialServer(1337);
 IPAddress ServerIP(192, 168, 4, 1);
+IPAddress ClientIP(192, 168, 4, 2);
 IPAddress myIP(0,0,0,0);
 IPAddress myAPIP(0,0,0,0);
 
@@ -62,6 +66,8 @@ char packetBuffer[9];
 bool scriptDone = false;
 
 int timesRun = 0;
+int shouldRun = 0;
+String scriptName;
 
 void setup() {
 //  EEPROM.begin(4096);
@@ -70,6 +76,9 @@ void setup() {
 //    EEPROM.write(i, 0);
 //  }
 //  EEPROM.end();
+
+  timesRun = 0;
+  shouldRun = 0;
   
   Serial.begin(115200);
 
@@ -145,6 +154,8 @@ void setup() {
 }
 
 void loop() {
+//  Serial.println(timesRun);
+  
   com::update();
   webserver::update();
 
@@ -155,41 +166,87 @@ void loop() {
   if (duckscript::isRunning()) {
           //Serial.println(timesRun);
 /////////////////////////////////////////////
-    if (timesRun == 0) {
-      //Serial.println(timesRun);
-      String scriptName = duckscript::currentScript();
-//      duckscript::run(scriptName);
-      File file = SPIFFS.open(scriptName, "r");
-      if (!file) {
-        Serial.println("Error opening file");
-        return;
-      }
-      String msg;
-      while (file.available()) {
-        msg += String(char(file.read()));
-//        delay(350);
+    if (mesh.getNodeList().size() > 0) {
+      shouldRun = 1; 
+      scriptName = duckscript::currentScript();
+      if (timesRun == 0) {
+        //Serial.println(timesRun);
+//        scriptName = duckscript::currentScript();
+  //      duckscript::run(scriptName);
+////////////////////////////////////////////////////////
+//        File file = SPIFFS.open(scriptName, "r");
+//        if (!file) {
+//          Serial.println("Error opening file");
+//          return;
+//        }
+//        String msg;
+//        while (file.available()) {
+//          msg += String(char(file.read()));
+//  //        delay(350);
+//  //        mesh.sendBroadcast(msg);
+//        }
+//  //      mesh.sendBroadcast(String(char(file.read())));
+//        Serial.println(msg);
+//        delay(300);
+//        
+//        Serial.println("Sending to mesh...");
+//        delay(300);
 //        mesh.sendBroadcast(msg);
+//        
+//        delay(300);
+//  //      mesh.sendBroadcast(scriptName);
+//        file.close();
+//        delay(300);
+//  //      timesRun++;
+//        timesRun = 1;
+//        Serial.println("Finished, and message should be broadcast.");
+////////////////////////////////////////////////////////////////////////
       }
-//      mesh.sendBroadcast(String(char(file.read())));
-      Serial.println(msg);
-      delay(300);
-      if (mesh.getNodeList().size() > 0) {
-        Serial.println("Sending to mesh...");
-        delay(300);
-        mesh.sendBroadcast(msg);
-      }
-      delay(300);
-//      mesh.sendBroadcast(scriptName);
-      file.close();
-      delay(300);
-//      timesRun++;
-      timesRun = 1;
+//      else {
+////      duckscript::stopAll();
+//      Serial.println("Still running.");
+//      }
     }
+    
 /////////////////////////////////////////////
   }
   if (!duckscript::isRunning() && timesRun == 1) {
 //    timesRun--;
+    Serial.println("Not running anymore, so setting to 0");
+    delay(300);
     timesRun = 0;
+    delay(300);
+    Serial.println("timesRun successfully set to 0.");
+  }
+  if (!duckscript::isRunning() && shouldRun == 1) {
+    File file = SPIFFS.open(scriptName, "r");
+    if (!file) {
+      Serial.println("Error opening file");
+      return;
+    }
+    String msg;
+    while (file.available()) {
+      msg += String(char(file.read()));
+//        delay(350);
+//        mesh.sendBroadcast(msg);
+    }
+//      mesh.sendBroadcast(String(char(file.read())));
+    Serial.println(msg);
+    delay(300);
+    
+    Serial.println("Sending to mesh...");
+    delay(300);
+    mesh.sendBroadcast(msg);
+    
+    delay(300);
+//      mesh.sendBroadcast(scriptName);
+    file.close();
+    delay(300);
+//      timesRun++;
+    timesRun = 1;
+    Serial.println("Finished, and message should be broadcast.");
+
+    shouldRun = 0;
   }
   
   /////////////////////////////////////////////
@@ -200,7 +257,7 @@ void loop() {
   }
   /////////////////////////////////////////////
   
-}
+}02
 
 void receivedCallback( const uint32_t &from, const String &msg ) {
   Serial.printf("bridge: Received from %u msg=%s\n", from, msg.c_str());
