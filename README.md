@@ -3,7 +3,7 @@
 This is a modification of [the original WiFiDuck by Spacehuhn](https://github.com/SpacehuhnTech/WiFiDuck). All credit goes to them.
 This gives mesh capability to the project, allowing the scripts to be run on multiple computers at once.
 
-Has been tested successfully on two ESP8266 and two Pro Micro boards.
+Has been tested successfully on three ESP8266 and two Pro Micro boards (one server and two clients).
 
 ~~It was all hacked together in a very short time period and is my first project dealing with mesh in this form. Expect bugs.~~
 
