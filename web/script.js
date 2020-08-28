@@ -115,8 +115,8 @@ function ws_update_status() {
 function ws_init() {
   status("connecting...");
 
-  //ws = new WebSocket("ws://192.168.4.1/ws");
-  ws = new WebSocket("ws://10.227.170.1/ws");
+  ws = new WebSocket("ws://192.168.4.1/ws");
+  //ws = new WebSocket("ws://10.227.170.1/ws");
 
   ws.onopen = function(event) {
     log_ws("connected");
